@@ -16,5 +16,8 @@ Base.metadata.create_all(engine)
 
 
 # BEGIN (write your solution here)
-
+from sqlalchemy import select
+def get_movies_with_directors(session):
+    query = select(Movie).options(joinedload(Movie.director)).order_by(Movie.title)
+    return session.execute(query).scalars().all()
 # END
